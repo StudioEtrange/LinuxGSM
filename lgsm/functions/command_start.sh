@@ -73,12 +73,8 @@ fn_start_tmux(){
 	echo "${port}" >> "${lockdir}/${selfname}.lock"
 	fn_reload_startparameters
 
-	if [ "${shortname}" == "av" ]; then
-		cd "${systemdir}" || exit
-	else
-		cd "${executabledir}" || exit
-	fi
-
+	cd "${executabledir}" || exit
+	
 	tmux new-session -d -x "${sessionwidth}" -y "${sessionheight}" -s "${sessionname}" "${preexecutable} ${executable} ${startparameters}" 2> "${lgsmlogdir}/.${selfname}-tmux-error.tmp"
 
 	# Create logfile.
